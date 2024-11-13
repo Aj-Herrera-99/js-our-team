@@ -8,12 +8,11 @@ creare una pagina dedicata  in cui mostrare una card per ciascun componente.
 const cardWrapper = document.getElementById("card-wrapper");
 const memberForm = document.getElementById("member-form");
 const formContainer = document.getElementById("form-container");
-let trashes;
 // generate all cards
 for (const member of teamMembers) {
     cardWrapper.insertAdjacentHTML("beforeend", generateCard(member));
 }
-trashes = cardWrapper.querySelectorAll(".trash");
+const trashes = cardWrapper.querySelectorAll(".trash");
 
 // event listeners
 memberForm.addEventListener("submit", handleSubmit);
@@ -25,10 +24,6 @@ for (const trash of trashes) {
 function handleSubmit(e) {
     e.preventDefault();
     // cancellazione messaggio di loading e sending se esiste
-    if (document.getElementById("sending")) {
-        const sending = document.getElementById("sending");
-        sending.remove();
-    }
     const fname = document.getElementById("fname");
     const lname = document.getElementById("lname");
     const role = document.getElementById("role");
@@ -77,6 +72,9 @@ function handleSubmit(e) {
         lname.value = "";
         role.value = role.options[0].value;
         email.value = "";
+        setTimeout(() => {
+            sending.remove();
+        }, 3000);
     }, 2500);
 }
 
