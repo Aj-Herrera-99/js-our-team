@@ -19,6 +19,11 @@ memberForm.addEventListener("submit", handleSubmit);
 //event handlers
 function handleSubmit(e) {
     e.preventDefault();
+    // cancellazione messaggio di loading e sending se esiste
+    if(document.getElementById("sending")){
+        const sending = document.getElementById("sending");
+        sending.remove();
+    }
     const fname = document.getElementById("fname");
     const lname = document.getElementById("lname");
     const role = document.getElementById("role");
