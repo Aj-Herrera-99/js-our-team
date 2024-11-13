@@ -1,5 +1,5 @@
 import { teamMembers } from "./db.js";
-import { capitalize } from "./utilities.js";
+import { capitalize, getRndInteger } from "./utilities.js";
 /**
 Dato un array di oggetti rappresentante un team di un’azienda, 
 creare una pagina dedicata  in cui mostrare una card per ciascun componente.
@@ -8,8 +8,9 @@ creare una pagina dedicata  in cui mostrare una card per ciascun componente.
 const cardWrapper = document.getElementById("card-wrapper");
 const memberForm = document.getElementById("member-form");
 const formContainer = document.getElementById("form-container");
-for (const member of teamMembers) {     // generate all cards from array of members
-    cardWrapper.insertAdjacentHTML("beforeend", generateCardFrom(member));  
+for (const member of teamMembers) {
+    // generate all cards from array of members
+    cardWrapper.insertAdjacentHTML("beforeend", generateCardFrom(member));
 }
 const trashes = cardWrapper.querySelectorAll(".trash");
 // event listeners
@@ -26,7 +27,15 @@ function handleSubmit(e) {
     const role = document.getElementById("role");
     const roleText = role.options[role.selectedIndex].innerHTML;
     const email = document.getElementById("email");
-    const image = "img/male1.png";
+    const strTemp = getRndInteger(0, 1) ? "male" : "female";
+    const image = `img/${strTemp}${getRndInteger(1, 3)}.png`;
+    const btnHovers = this.querySelectorAll(".hover");
+    // disable hover buttons
+    for (const btn of btnHovers) {
+        btn.disabled = true;
+        btn.classList.toggle("disabled");
+        btn.classList.toggle("hover");
+    }
     // creazione nuovo membro del team
     const newMember = createNewMember(
         capitalize(fname.value.trim()),
@@ -64,7 +73,13 @@ function handleSubmit(e) {
         // eliminazione messaggio di loading e applicazione
         setTimeout(() => {
             sending.remove();
-        }, 5000);
+            // enable hover buttons
+            for (const btn of btnHovers) {
+                btn.disabled = false;
+                btn.classList.toggle("disabled");
+                btn.classList.toggle("hover");
+            }
+        }, 2500);
     }, 2500);
 }
 
