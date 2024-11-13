@@ -67,6 +67,7 @@ h1 {
 }
 
 .form-container {
+    margin-top: 20px;
     max-width: 30%;
     min-width: 300px;
     background: whitesmoke;
@@ -153,4 +154,14 @@ h1 {
 
 .trash:hover {
     scale: 125%;
+}
+
+@media screen and (max-width: 1060px) {
+    .card-wrapper{
+        width: 100%;
+    }
+    .form-container{
+        max-width: 50%;
+        /* width: 50%; */
+    }
 }
