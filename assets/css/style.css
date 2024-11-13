@@ -16,7 +16,6 @@ body {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
-
 }
 
 h1 {
@@ -25,6 +24,7 @@ h1 {
 
 .container {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .card-wrapper {
@@ -38,6 +38,7 @@ h1 {
 }
 
 .card {
+    background: whitesmoke;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -54,18 +55,53 @@ h1 {
 
 .card:hover {
     scale: 102%;
-    background: #c9f6ff74;
+    background: #dedede8e;
 }
 
 .form-container {
     width: 30%;
-    border: 1px solid red;
+    min-width: 300px;
+    background: whitesmoke;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px #70707024;
 }
 
 .member-form {
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px;
+    gap: 20px;
 }
 
+.member-form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.member-form input,
+.member-form select {
+    all: unset;
+    padding: 6px 12px;
+    border: 1px solid #9f9f9f;
+    border-radius: 4px;
+}
+
+.member-form input::placeholder{
+    color: rgb(104, 104, 104);
+}
+
+.member-form button {
+    all: unset;
+    width: fit-content;
+    background: #886969d0;
+    color: #fff;
+    padding: 6px 12px;
+    border: 1px solid #9f9f9f;
+    border-radius: 4px;
+    cursor: pointer;
+}
 .d-none {
     display: none;
 }

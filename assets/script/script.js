@@ -25,7 +25,7 @@ function handleSubmit(e) {
     const roleText = role.options[role.selectedIndex].innerHTML;
     const email = document.getElementById("email");
     const image = "img/male1.png";
-    const newMember = createNewMember(fname.value, lname.value, roleText, email.value, image);
+    const newMember = createNewMember(fname.value.trim(), lname.value.trim(), roleText, email.value, image);
     // simulazione di un loading
     formContainer.insertAdjacentHTML(
         "beforeend",
@@ -49,6 +49,7 @@ function handleSubmit(e) {
         You're part of the team now!`;
         // inserisci in teamMembers il nuovo membro
         teamMembers.push(newMember);
+        console.log(teamMembers)
         // genera card usando come valori i valori di input inseriti nel form
         cardWrapper.insertAdjacentHTML("beforeend", generateCard(newMember));
         // clearing form
