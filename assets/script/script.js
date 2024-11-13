@@ -2,7 +2,7 @@ import { teamMembers } from "./db.js";
 import { capitalize, getRndInteger } from "./utilities.js";
 /**
 Dato un array di oggetti rappresentante un team di un’azienda, 
-creare una pagina dedicata  in cui mostrare una card per ciascun componente.
+creare una pagina dedicata in cui mostrare una card per ciascun componente.
  */
 // DOM elements selection
 const cardWrapper = document.getElementById("card-wrapper");
@@ -88,27 +88,29 @@ function handleTrash(e) {
     e.stopPropagation();
     // selezione in salita della card padre
     const cardParent = this.parentElement.parentElement;
-    // selezione in salita del card wrapper
-    const wrapperParent = this.parentElement.parentElement.parentElement;
     // ricerca index della card padre rispetto al wrapper
     let index = -1;
-    for (let i = 0; i < wrapperParent.children.length; i++) {
-        if (wrapperParent.children[i] === cardParent) {
+    for (let i = 0; i < cardWrapper.childElementCount; i++) {
+        if (cardWrapper.children[i] === cardParent) {
             index = i;
             break;
         }
     }
-    // Elimino dall'array dei membri, il membro con l'index trovato
-    teamMembers.splice(index, 1);
-    // Elimino dalla pagina la card con l'index trovato
-    cardParent.remove();
-    console.log(teamMembers);
+    if (index !== -1) {
+        // Elimino dall'array dei membri, il membro con l'index trovato
+        teamMembers.splice(index, 1);
+        // Elimino dalla pagina la card con l'index trovato
+        cardParent.remove();
+        console.log(teamMembers);
+    } else {
+        console.error("ERRORE")
+    }
 }
 
 //! functions
 /**
  * @param {teamMembers[0]} obj
- * @returns
+ * @returns {string}
  */
 function generateCardFrom(obj) {
     return `<div class="card">
@@ -127,7 +129,14 @@ function generateCardFrom(obj) {
             </div>
         </div>`;
 }
-
+/**
+ * @param {string} fname
+ * @param {string} lname
+ * @param {string} role
+ * @param {string} email
+ * @param {string} image
+ * @returns {object}
+ */
 function createNewMember(fname, lname, role, email, image) {
     return {
         name: fname + " " + lname,
@@ -136,7 +145,10 @@ function createNewMember(fname, lname, role, email, image) {
         img: image,
     };
 }
-
+/**
+ * @param {HTMLElement} container
+ * @returns {[number, HTMLElement] }
+ */
 function loadingText(container) {
     container.insertAdjacentHTML(
         "beforeend",
