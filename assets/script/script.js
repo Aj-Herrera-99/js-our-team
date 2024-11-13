@@ -152,20 +152,20 @@ function createNewMember(fname, lname, role, email, image) {
 function loadingText(container) {
     container.insertAdjacentHTML(
         "beforeend",
-        `<div class="sending"><p class="sending-content">Sending . </p></div>`
+        `<div class="modal"><p class="modal-content">Sending . </p></div>`
     );
-    const sending = container.querySelector(".sending");
-    const sendingContent = container.querySelector(".sending-content");
+    const modal = container.querySelector(".modal");
+    const modalContent = container.querySelector(".modal-content");
     let count = 1;
     const bound = 3;
     const clock = setInterval(() => {
         count++;
         if (count <= bound) {
-            sendingContent.append(" .");
+            modalContent.append(" .");
         } else {
-            sendingContent.innerHTML = "Sending .";
+            modalContent.innerHTML = "Sending .";
             count = 1;
         }
     }, 350);
-    return [clock, sending, sendingContent];
+    return [clock, modal, modalContent];
 }
