@@ -68,6 +68,13 @@ function handleSubmit(e) {
         console.log(teamMembers);
         // genera card usando come valori i valori di input inseriti nel form
         cardWrapper.insertAdjacentHTML("beforeend", generateCard(newMember));
+        // aggiunge evento 
+        // console.log(cardWrapper.lastElementChild);
+        const newTrash = cardWrapper.lastElementChild.querySelector(".trash");
+        console.log(newTrash);
+        for (const trash of trashes) {
+            trash.addEventListener("click", handleTrash);
+        }
         // clearing form
         fname.value = "";
         lname.value = "";
@@ -79,7 +86,20 @@ function handleSubmit(e) {
 function handleTrash(e) {
     e.preventDefault();
     e.stopPropagation();
-    console.log(e);
+    // ricerca in salita della card padre
+    const cardParent = this.parentElement.parentElement;
+    const wrapperParent = this.parentElement.parentElement.parentElement;
+    // ricerca index della card padre rispetto al wrapper
+    let index = -1;
+    for(let i=0; i<wrapperParent.children.length; i++){
+        if(wrapperParent.children[i] === cardParent){
+            index = i;
+            break;
+        }
+    }
+    teamMembers.splice(index, 1);
+    cardParent.remove();
+    console.log(teamMembers);
 }
 
 /**
