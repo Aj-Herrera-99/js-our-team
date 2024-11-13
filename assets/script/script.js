@@ -1,4 +1,5 @@
 import { teamMembers } from "./db.js";
+import { capitalize } from "./utilities.js";
 /**
 Dato un array di oggetti rappresentante un team di un’azienda, 
 creare una pagina dedicata  in cui mostrare una card per ciascun componente.
@@ -30,7 +31,7 @@ function handleSubmit(e) {
     const roleText = role.options[role.selectedIndex].innerHTML;
     const email = document.getElementById("email");
     const image = "img/male1.png";
-    const newMember = createNewMember(fname.value.trim(), lname.value.trim(), roleText, email.value, image);
+    const newMember = createNewMember(capitalize(fname.value.trim()), capitalize(lname.value.trim()), roleText, email.value, image);
     // simulazione di un loading
     formContainer.insertAdjacentHTML(
         "beforeend",
