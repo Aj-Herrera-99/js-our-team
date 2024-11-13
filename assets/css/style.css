@@ -45,6 +45,7 @@ body {
 
 .card img {
     border-radius: 3px;
+    max-width: 200px;
 }
 
 .card:hover {

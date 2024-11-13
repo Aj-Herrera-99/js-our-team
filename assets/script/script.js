@@ -5,7 +5,9 @@ creare una pagina dedicata  in cui mostrare una card per ciascun componente.
  */
 // DOM elements selection
 const cardWrapper = document.getElementById("card-wrapper");
-cardWrapper.insertAdjacentHTML("beforeend", generateCard(teamMembers[0]))
+for(const member of teamMembers){
+    cardWrapper.insertAdjacentHTML("beforeend", generateCard(member));
+}
 
 /**
  * 
