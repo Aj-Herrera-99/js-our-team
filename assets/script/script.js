@@ -8,18 +8,24 @@ creare una pagina dedicata  in cui mostrare una card per ciascun componente.
 const cardWrapper = document.getElementById("card-wrapper");
 const memberForm = document.getElementById("member-form");
 const formContainer = document.getElementById("form-container");
+let trashes;
 // generate all cards
 for (const member of teamMembers) {
     cardWrapper.insertAdjacentHTML("beforeend", generateCard(member));
 }
+trashes = cardWrapper.querySelectorAll(".trash");
+
 // event listeners
 memberForm.addEventListener("submit", handleSubmit);
+for (const trash of trashes) {
+    trash.addEventListener("click", handleTrash);
+}
 
 //event handlers
 function handleSubmit(e) {
     e.preventDefault();
     // cancellazione messaggio di loading e sending se esiste
-    if(document.getElementById("sending")){
+    if (document.getElementById("sending")) {
         const sending = document.getElementById("sending");
         sending.remove();
     }
@@ -29,7 +35,13 @@ function handleSubmit(e) {
     const roleText = role.options[role.selectedIndex].innerHTML;
     const email = document.getElementById("email");
     const image = "img/male1.png";
-    const newMember = createNewMember(capitalize(fname.value.trim()), capitalize(lname.value.trim()), roleText, email.value, image);
+    const newMember = createNewMember(
+        capitalize(fname.value.trim()),
+        capitalize(lname.value.trim()),
+        roleText,
+        email.value,
+        image
+    );
     // simulazione di un loading
     formContainer.insertAdjacentHTML(
         "beforeend",
@@ -53,7 +65,7 @@ function handleSubmit(e) {
         You're part of the team now!`;
         // inserisci in teamMembers il nuovo membro
         teamMembers.push(newMember);
-        console.log(teamMembers)
+        console.log(teamMembers);
         // genera card usando come valori i valori di input inseriti nel form
         cardWrapper.insertAdjacentHTML("beforeend", generateCard(newMember));
         // clearing form
@@ -61,8 +73,13 @@ function handleSubmit(e) {
         lname.value = "";
         role.value = role.options[0].value;
         email.value = "";
-
     }, 2500);
+}
+
+function handleTrash(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log(e);
 }
 
 /**
@@ -80,7 +97,10 @@ function generateCard(cardObj) {
         cardObj.img.length - 4
     )}" />
                 </div>
-                <span>${cardObj.name}</span>
+                <div class="d-flex content-between">
+                    <span>${cardObj.name}</span>
+                    <i class="fa-solid fa-trash trash"></i>
+                </div>
                 <span>${cardObj.role}</span>
                 <span>${cardObj.email}</span>
             </div>

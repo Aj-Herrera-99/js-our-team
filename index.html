@@ -8,7 +8,14 @@
         <link
             href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
             rel="stylesheet"
-        />  
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+            integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        />
         <script type="module" src="./assets/script/script.js"></script>
         <link rel="stylesheet" href="./assets/css/style.css" />
         <title>Our Team</title>
@@ -16,36 +23,57 @@
     <body>
         <h1>Welcome To Our Team</h1>
         <div class="container">
-            <div id="card-wrapper" class="card-wrapper">
-            </div>
+            <div id="card-wrapper" class="card-wrapper"></div>
             <div id="form-container" class="form-container">
                 <h2>Wanna Be Part Of Our Team?</h2>
                 <h3>Fill out the form!</h3>
                 <form action="#" id="member-form" class="member-form">
                     <div>
                         <label for="fname">Enter your first name</label>
-                        <input type="text" id="fname" name="fname" placeholder="John" required>
+                        <input
+                            type="text"
+                            id="fname"
+                            name="fname"
+                            placeholder="John"
+                            required
+                        />
                     </div>
                     <div>
                         <label for="lname">Enter your last name</label>
-                        <input type="text" id="lname" name="lname" placeholder="Doe" required>
+                        <input
+                            type="text"
+                            id="lname"
+                            name="lname"
+                            placeholder="Doe"
+                            required
+                        />
                     </div>
                     <div>
                         <label for="role">Enter your role</label>
                         <select name="role" id="role">
                             <option value="designer">Designer</option>
-                            <option value="frontend">Front-end Developer</option>
+                            <option value="frontend">
+                                Front-end Developer
+                            </option>
                             <option value="backend">Back-end Developer</option>
                             <option value="devops">Dev Ops</option>
                             <option value="productm">Product Manager</option>
                             <option value="projectm">Project Manager</option>
                             <option value="debugger">Debugger</option>
-                            <option value="fullstack">Fullstack Developer</option>
+                            <option value="fullstack">
+                                Fullstack Developer
+                            </option>
                         </select>
                     </div>
                     <div>
                         <label for="email">Enter your email</label>
-                        <input type="email" id="email" name="email" placeholder="johndoe@example.com" required>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="johndoe@example.com"
+                            required
+                        />
                     </div>
                     <div>
                         <button type="submit">Send Application</button>

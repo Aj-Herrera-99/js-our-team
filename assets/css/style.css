@@ -50,7 +50,7 @@ h1 {
 
 .card img {
     border-radius: 3px;
-    max-width: 200px;
+    width: 250px;
 }
 
 .card:hover {
@@ -104,4 +104,20 @@ h1 {
 }
 .d-none {
     display: none;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.content-between {
+    justify-content: space-between;
+}
+
+.trash{
+    transition: all .4s ease;
+}
+
+.trash:hover {
+    scale: 125%;
 }
