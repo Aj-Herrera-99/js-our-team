@@ -1,0 +1,53 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+
+.card-container {
+    max-width: 1000px;
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.card {
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 7px;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: scale 0.3s ease;
+}
+
+.card img {
+    border-radius: 3px;
+}
+
+.card:hover {
+    scale: 102%;
+    background: #c9f6ff74;
+}
