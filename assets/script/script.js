@@ -7,6 +7,8 @@ creare una pagina dedicata  in cui mostrare una card per ciascun componente.
 const cardWrapper = document.getElementById("card-wrapper");
 const memberForm = document.getElementById("member-form");
 const formContainer = document.getElementById("form-container");
+const role = document.getElementById("role");
+// console.log(role.value);
 // generate all cards
 for (const member of teamMembers) {
     cardWrapper.insertAdjacentHTML("beforeend", generateCard(member));
@@ -17,13 +19,13 @@ memberForm.addEventListener("submit", handleSubmit);
 //event handlers
 function handleSubmit(e) {
     e.preventDefault();
-    const fname = document.getElementById("fname").value;
-    const lname = document.getElementById("lname").value;
+    const fname = document.getElementById("fname");
+    const lname = document.getElementById("lname");
     const role = document.getElementById("role");
     const roleText = role.options[role.selectedIndex].innerHTML;
-    const email = document.getElementById("email").value;
+    const email = document.getElementById("email");
     const image = "img/male1.png";
-    const newMember = createNewMember(fname, lname, roleText, email, image);
+    const newMember = createNewMember(fname.value, lname.value, roleText, email.value, image);
     // simulazione di un loading
     formContainer.insertAdjacentHTML(
         "beforeend",
@@ -49,7 +51,12 @@ function handleSubmit(e) {
         teamMembers.push(newMember);
         // genera card usando come valori i valori di input inseriti nel form
         cardWrapper.insertAdjacentHTML("beforeend", generateCard(newMember));
-        console.log(teamMembers);
+        // clearing form
+        fname.value = "";
+        lname.value = "";
+        role.value = role.options[0].value;
+        email.value = "";
+
     }, 2500);
 }
 
