@@ -8,8 +8,6 @@ creare una pagina dedicata  in cui mostrare una card per ciascun componente.
 const cardWrapper = document.getElementById("card-wrapper");
 const memberForm = document.getElementById("member-form");
 const formContainer = document.getElementById("form-container");
-const role = document.getElementById("role");
-// console.log(role.value);
 // generate all cards
 for (const member of teamMembers) {
     cardWrapper.insertAdjacentHTML("beforeend", generateCard(member));
