@@ -24,19 +24,28 @@
                 <form action="#" id="member-form" class="member-form">
                     <div>
                         <label for="fname">Enter your first name</label>
-                        <input type="text" id="fname" name="fname" placeholder="John">
+                        <input type="text" id="fname" name="fname" placeholder="John" required>
                     </div>
                     <div>
                         <label for="lname">Enter your last name</label>
-                        <input type="text" id="lname" name="lname" placeholder="Doe">
+                        <input type="text" id="lname" name="lname" placeholder="Doe" required>
                     </div>
                     <div>
                         <label for="role">Enter your role</label>
-                        <input type="text" id="role" name="role" placeholder="Assistant Manager">
+                        <select name="role" id="role">
+                            <option value="designer">Designer</option>
+                            <option value="frontend">Front-end Developer</option>
+                            <option value="backend">Back-end Developer</option>
+                            <option value="devops">Dev Ops</option>
+                            <option value="productm">Product Manager</option>
+                            <option value="projectm">Project Manager</option>
+                            <option value="debugger">Debugger</option>
+                            <option value="fullstack">Fullstack Developer</option>
+                        </select>
                     </div>
                     <div>
                         <label for="email">Enter your email</label>
-                        <input type="text" id="email" name="email" placeholder="johndoe@example.com">
+                        <input type="email" id="email" name="email" placeholder="johndoe@example.com" required>
                     </div>
                     <div>
                         <button type="submit">Send Application</button>

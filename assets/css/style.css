@@ -28,7 +28,7 @@ h1 {
 }
 
 .card-wrapper {
-    width: 75%;
+    width: 70%;
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -58,7 +58,12 @@ h1 {
 }
 
 .form-container {
+    width: 30%;
     border: 1px solid red;
+}
+
+.member-form {
+    padding: 20px;
 }
 
 .d-none {

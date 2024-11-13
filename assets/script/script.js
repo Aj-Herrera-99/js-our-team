@@ -19,10 +19,12 @@ function handleSubmit(e) {
     e.preventDefault();
     const fname = document.getElementById("fname").value;
     const lname = document.getElementById("lname").value;
-    const role = document.getElementById("role").value;
+    const role = document.getElementById("role");
+    const roleText = role.options[role.selectedIndex].innerHTML;
     const email = document.getElementById("email").value;
     const image = "img/male1.png";
-    const newMember = createNewMember(fname, lname, role, email, image);
+    const newMember = createNewMember(fname, lname, roleText, email, image);
+    // simulazione di un loading
     formContainer.insertAdjacentHTML(
         "beforeend",
         `<p id="sending">Sending . </p>`
@@ -39,11 +41,15 @@ function handleSubmit(e) {
             count = 1;
         }
     }, 350);
-
     setTimeout(() => {
         clearInterval(clock);
         sending.innerHTML = `Congratulations! Your application has been accepted!<br>
-        You're parte of the team now!`
+        You're part of the team now!`;
+        // inserisci in teamMembers il nuovo membro
+        teamMembers.push(newMember);
+        // genera card usando come valori i valori di input inseriti nel form
+        cardWrapper.insertAdjacentHTML("beforeend", generateCard(newMember));
+        console.log(teamMembers);
     }, 2500);
 }
 
