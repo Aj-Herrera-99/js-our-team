@@ -45,12 +45,12 @@ function handleSubmit(e) {
         image
     );
     // simulazione di un loading con setInterval
-    const [clock, sending] = loadingText(formContainer);
+    const [clock, sending, sendingContent] = loadingText(document.body);
     // al termine del loading fai questo
     setTimeout(() => {
         // stop del setInterval
         clearInterval(clock);
-        sending.innerHTML = `Congratulations! Your application has been accepted!<br>
+        sendingContent.innerHTML = `Congratulations! Your application has been accepted!<br>
         You're part of the team now!`;
         // inserisci in teamMembers il nuovo membro
         teamMembers.push(newMember);
@@ -79,8 +79,8 @@ function handleSubmit(e) {
                 btn.classList.toggle("disabled");
                 btn.classList.toggle("hover");
             }
-        }, 2500);
-    }, 2500);
+        }, 1500);
+    }, 2000);
 }
 
 function handleTrash(e) {
@@ -152,19 +152,20 @@ function createNewMember(fname, lname, role, email, image) {
 function loadingText(container) {
     container.insertAdjacentHTML(
         "beforeend",
-        `<p class="sending">Sending . </p>`
+        `<div class="sending"><p class="sending-content">Sending . </p></div>`
     );
     const sending = container.querySelector(".sending");
+    const sendingContent = container.querySelector(".sending-content");
     let count = 1;
     const bound = 3;
     const clock = setInterval(() => {
         count++;
         if (count <= bound) {
-            sending.append(" .");
+            sendingContent.append(" .");
         } else {
-            sending.innerHTML = "Sending .";
+            sendingContent.innerHTML = "Sending .";
             count = 1;
         }
     }, 350);
-    return [clock, sending];
+    return [clock, sending, sendingContent];
 }
