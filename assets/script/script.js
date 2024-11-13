@@ -68,8 +68,7 @@ function handleSubmit(e) {
         console.log(teamMembers);
         // genera card usando come valori i valori di input inseriti nel form
         cardWrapper.insertAdjacentHTML("beforeend", generateCard(newMember));
-        // aggiunge evento
-        // console.log(cardWrapper.lastElementChild);
+        // aggiunge event listener al trash della nuova card
         const newTrash = cardWrapper.lastElementChild.querySelector(".trash");
         console.log(newTrash);
         newTrash.addEventListener("click", handleTrash);
@@ -84,8 +83,9 @@ function handleSubmit(e) {
 function handleTrash(e) {
     e.preventDefault();
     e.stopPropagation();
-    // ricerca in salita della card padre
+    // selezione in salita della card padre
     const cardParent = this.parentElement.parentElement;
+    // selezione in salita del card wrapper
     const wrapperParent = this.parentElement.parentElement.parentElement;
     // ricerca index della card padre rispetto al wrapper
     let index = -1;
