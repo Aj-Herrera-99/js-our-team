@@ -22,7 +22,7 @@ body {
 
 }
 
-.card-container {
+.card-wrapper {
     max-width: 1000px;
     margin-top: 20px;
     display: flex;
