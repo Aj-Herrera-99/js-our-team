@@ -45,12 +45,12 @@ function handleSubmit(e) {
         image
     );
     // simulazione di un loading con setInterval
-    const [clock, sending, sendingContent] = loadingText(document.body);
+    const [clock, modal, modalContent] = loadingText(document.body);
     // al termine del loading fai questo
     setTimeout(() => {
         // stop del setInterval
         clearInterval(clock);
-        sendingContent.innerHTML = `Congratulations! Your application has been accepted!<br>
+        modalContent.innerHTML = `Congratulations! Your application has been accepted!<br>
         You're part of the team now!`;
         // inserisci in teamMembers il nuovo membro
         teamMembers.push(newMember);
@@ -72,15 +72,15 @@ function handleSubmit(e) {
         email.value = "";
         // eliminazione messaggio di loading e applicazione
         setTimeout(() => {
-            sending.remove();
+            modal.remove();
             // enable hover buttons
             for (const btn of btnHovers) {
                 btn.disabled = false;
                 btn.classList.toggle("disabled");
                 btn.classList.toggle("hover");
             }
-        }, 1500);
-    }, 2000);
+        }, 2500);
+    }, 1500);
 }
 
 function handleTrash(e) {
@@ -166,6 +166,6 @@ function loadingText(container) {
             modalContent.innerHTML = "Sending .";
             count = 1;
         }
-    }, 350);
+    }, 300);
     return [clock, modal, modalContent];
 }
