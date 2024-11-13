@@ -8,28 +8,26 @@ creare una pagina dedicata  in cui mostrare una card per ciascun componente.
 const cardWrapper = document.getElementById("card-wrapper");
 const memberForm = document.getElementById("member-form");
 const formContainer = document.getElementById("form-container");
-// generate all cards
-for (const member of teamMembers) {
-    cardWrapper.insertAdjacentHTML("beforeend", generateCard(member));
+for (const member of teamMembers) {     // generate all cards from array of members
+    cardWrapper.insertAdjacentHTML("beforeend", generateCardFrom(member));  
 }
 const trashes = cardWrapper.querySelectorAll(".trash");
-
 // event listeners
 memberForm.addEventListener("submit", handleSubmit);
 for (const trash of trashes) {
     trash.addEventListener("click", handleTrash);
 }
-
 //event handlers
 function handleSubmit(e) {
     e.preventDefault();
-    // cancellazione messaggio di loading e sending se esiste
+    // variabili
     const fname = document.getElementById("fname");
     const lname = document.getElementById("lname");
     const role = document.getElementById("role");
     const roleText = role.options[role.selectedIndex].innerHTML;
     const email = document.getElementById("email");
     const image = "img/male1.png";
+    // creazione nuovo membro del team
     const newMember = createNewMember(
         capitalize(fname.value.trim()),
         capitalize(lname.value.trim()),
@@ -37,24 +35,11 @@ function handleSubmit(e) {
         email.value,
         image
     );
-    // simulazione di un loading
-    formContainer.insertAdjacentHTML(
-        "beforeend",
-        `<p id="sending">Sending . </p>`
-    );
-    const sending = document.getElementById("sending");
-    let count = 1;
-    const bound = 3;
-    const clock = setInterval(() => {
-        count++;
-        if (count <= bound) {
-            sending.append(" .");
-        } else {
-            sending.innerHTML = "Sending .";
-            count = 1;
-        }
-    }, 350);
+    // simulazione di un loading con setInterval
+    const [clock, sending] = loadingText(formContainer);
+    // al termine del loading fai questo
     setTimeout(() => {
+        // stop del setInterval
         clearInterval(clock);
         sending.innerHTML = `Congratulations! Your application has been accepted!<br>
         You're part of the team now!`;
@@ -62,19 +47,24 @@ function handleSubmit(e) {
         teamMembers.push(newMember);
         console.log(teamMembers);
         // genera card usando come valori i valori di input inseriti nel form
-        cardWrapper.insertAdjacentHTML("beforeend", generateCard(newMember));
+        cardWrapper.insertAdjacentHTML(
+            "beforeend",
+            generateCardFrom(newMember)
+        );
         // aggiunge event listener al trash della nuova card
-        const newTrash = cardWrapper.lastElementChild.querySelector(".trash");
-        console.log(newTrash);
+        const lastCard = cardWrapper.lastElementChild;
+        lastCard.scrollIntoView(true);
+        const newTrash = lastCard.querySelector(".trash");
         newTrash.addEventListener("click", handleTrash);
         // clearing form
         fname.value = "";
         lname.value = "";
         role.value = role.options[0].value;
         email.value = "";
+        // eliminazione messaggio di loading e applicazione
         setTimeout(() => {
             sending.remove();
-        }, 3000);
+        }, 5000);
     }, 2500);
 }
 
@@ -93,32 +83,32 @@ function handleTrash(e) {
             break;
         }
     }
+    // Elimino dall'array dei membri, il membro con l'index trovato
     teamMembers.splice(index, 1);
+    // Elimino dalla pagina la card con l'index trovato
     cardParent.remove();
     console.log(teamMembers);
 }
 
+//! functions
 /**
- *
- * @param {teamMembers[0]} cardObj
+ * @param {teamMembers[0]} obj
  * @returns
  */
-function generateCard(cardObj) {
+function generateCardFrom(obj) {
     return `<div class="card">
                 <div class="image">
-                    <img src="./assets/${
-                        cardObj.img
-                    }" alt="${cardObj.img.substring(
-        0,
-        cardObj.img.length - 4
-    )}" />
+                    <img 
+                        src="./assets/${obj.img}" 
+                        alt="${obj.img.substring(4, obj.img.length - 4)}" 
+                    />
                 </div>
                 <div class="d-flex content-between">
-                    <span>${cardObj.name}</span>
+                    <span>${obj.name}</span>
                     <i class="fa-solid fa-trash trash"></i>
                 </div>
-                <span>${cardObj.role}</span>
-                <span>${cardObj.email}</span>
+                <span>${obj.role}</span>
+                <span>${obj.email}</span>
             </div>
         </div>`;
 }
@@ -130,4 +120,24 @@ function createNewMember(fname, lname, role, email, image) {
         email: email,
         img: image,
     };
+}
+
+function loadingText(container) {
+    container.insertAdjacentHTML(
+        "beforeend",
+        `<p class="sending">Sending . </p>`
+    );
+    const sending = container.querySelector(".sending");
+    let count = 1;
+    const bound = 3;
+    const clock = setInterval(() => {
+        count++;
+        if (count <= bound) {
+            sending.append(" .");
+        } else {
+            sending.innerHTML = "Sending .";
+            count = 1;
+        }
+    }, 350);
+    return [clock, sending];
 }
