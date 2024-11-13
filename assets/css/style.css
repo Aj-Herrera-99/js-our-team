@@ -12,9 +12,6 @@ img {
 }
 
 body {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     padding: 20px;
     font-family: "Poppins", sans-serif;
     font-weight: 400;
@@ -22,8 +19,16 @@ body {
 
 }
 
+h1 {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+}
+
 .card-wrapper {
-    max-width: 1000px;
+    width: 75%;
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
@@ -33,7 +38,6 @@ body {
 }
 
 .card {
-    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -51,4 +55,8 @@ body {
 .card:hover {
     scale: 102%;
     background: #c9f6ff74;
+}
+
+.form-container {
+    border: 1px solid red;
 }
